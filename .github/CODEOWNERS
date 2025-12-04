@@ -1,0 +1,10 @@
+# Global owners
+* @pms-team
+
+# Java source code
+/src/ @pms-backend-team
+
+# Infrastructure
+/charts/ @pms-devops-team
+/Dockerfile @pms-devops-team
+/docker-compose.dev.yml @pms-devops-team

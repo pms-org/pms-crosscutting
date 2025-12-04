@@ -1,0 +1,6 @@
+apiVersion: v2
+name: pms-crossref
+description: A Helm chart for PMS CrossRef Service
+type: application
+version: 0.1.0
+appVersion: "0.0.1-SNAPSHOT"

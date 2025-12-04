@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  pms-crosscutting:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pms-crosscutting:1.0
+    container_name: pms-crosscutting
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      
+      # Connect to PostgreSQL container
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pms-db
+      SPRING_DATASOURCE_USERNAME: pms-usr
+      SPRING_DATASOURCE_PASSWORD: pms-pw
+      
+      # Connect to Kafka container
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    restart: unless-stopped
+    networks:
+      - pms-network
+
+networks:
+  pms-network:
+    external: true
+    name: pms-ingestion_pms-network
