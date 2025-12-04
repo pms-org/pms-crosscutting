@@ -24,9 +24,13 @@ spring:
     consumer:
       bootstrap-servers: localhost:9092
       auto-offset-reset: earliest
-      enable-auto-commit: true
+      enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 500
+      fetch-min-size: 1024
+    listener:
+      ack-mode: batch
 
 management:
   endpoints:
