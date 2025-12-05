@@ -22,7 +22,7 @@ USER spring:spring
 # Copy JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8083
 
 ENV JAVA_OPTS=""
 

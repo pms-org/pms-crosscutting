@@ -44,7 +44,7 @@ public class LifecycleEventConsumer {
     @PreDestroy
     public void shutdown() {
         scheduler.shutdown();
-        processBatch(); // Process remaining events
+        processBatch();
     }
 
     @KafkaListener(topicPartitions = @TopicPartition(topic = "lifecycle.event", partitions = "0"))
