@@ -47,7 +47,7 @@ public class LifecycleEventConsumer {
         processBatch();
     }
 
-    @KafkaListener(topicPartitions = @TopicPartition(topic = "lifecycle.event", partitions = "0"))
+    @KafkaListener(topics = "lifecycle.event", groupId = "pms-crossref-group")
     public void consume(String payload) {
         log.debug("Kafka message received, queue size: {}", eventQueue.size());
         

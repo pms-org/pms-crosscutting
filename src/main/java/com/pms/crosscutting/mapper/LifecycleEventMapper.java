@@ -22,9 +22,7 @@ public class LifecycleEventMapper {
         entity.setPortfolioId(dto.getPortfolioId());
         entity.setStage(dto.getStage());
         entity.setStatus(dto.getStatus());
-        // Convert Instant to LocalDateTime
-        entity.setTimestamp(LocalDateTime.ofInstant(dto.getTs(), ZoneOffset.UTC));
-        // Serialize details Map to JSON string
+        entity.setTimestamp(LocalDateTime.ofInstant(dto.getTimestamp(), ZoneOffset.UTC));
         try {
             entity.setDetails(objectMapper.writeValueAsString(dto.getDetails()));
         } catch (Exception e) {
@@ -39,8 +37,7 @@ public class LifecycleEventMapper {
         dto.setPortfolioId(entity.getPortfolioId());
         dto.setStage(entity.getStage());
         dto.setStatus(entity.getStatus());
-        dto.setTs(entity.getTimestamp().toInstant(ZoneOffset.UTC));
-        // Parse JSON string back to Map
+        dto.setTimestamp(entity.getTimestamp().toInstant(ZoneOffset.UTC));
         try {
             dto.setDetails(objectMapper.readValue(entity.getDetails(), Map.class));
         } catch (Exception e) {

@@ -7,6 +7,7 @@ import com.pms.crosscutting.repository.LifecycleEventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +24,8 @@ public class LifecycleQueryService {
     }
 
     public List<LifecycleEventDto> findByPortfolioId(String portfolioId) {
-        List<LifecycleEventEntity> entities = repository.findByPortfolioIdOrderByTimestampDesc(portfolioId);
+        UUID uuid = UUID.fromString(portfolioId);
+        List<LifecycleEventEntity> entities = repository.findByPortfolioIdOrderByTimestampDesc(uuid);
         return entities.stream()
                 .map(mapper::toDto)
                 .toList();

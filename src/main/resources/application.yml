@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8084
 
 
 spring:
@@ -7,7 +7,7 @@ spring:
     name: pms-crosscutting-service
   
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db-instance-pms.cvk4yqey0ex7.us-east-2.rds.amazonaws.com:5432/pms_db}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://db-instance-pms.cvk4yqey0ex7.us-east-2.rds.amazonaws.com:5432/pms_crosscutting_db}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:PMS.2025}
     driver-class-name: org.postgresql.Driver
@@ -20,9 +20,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
+      group-id: pms-crossref-group
       auto-offset-reset: earliest
       enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -47,3 +52,4 @@ logging:
     org.springframework.kafka: DEBUG
     org.apache.kafka: DEBUG
     org.apache.kafka.clients.consumer: DEBUG
+    liquibase: DEBUG

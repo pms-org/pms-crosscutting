@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-lifecycle-event-table
+      author: pms-crosscutting
+      changes:
+        - createTable:
+            tableName: lifecycle_events
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              
+              - column:
+                  name: trace_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              
+              - column:
+                  name: portfolio_id
+                  type: uuid
+              
+              - column:
+                  name: stage
+                  type: varchar(50)
+              
+              - column:
+                  name: status
+                  type: varchar(50)
+              
+              - column:
+                  name: timestamp
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              
+              - column:
+                  name: details
+                  type: text
+
+        - createIndex:
+            indexName: idx_lifecycle_trace_id
+            tableName: lifecycle_events
+            columns:
+              - column:
+                  name: trace_id
+
+        - createIndex:
+            indexName: idx_lifecycle_portfolio_id
+            tableName: lifecycle_events
+            columns:
+              - column:
+                  name: portfolio_id
+
+        - createIndex:
+            indexName: idx_lifecycle_timestamp
+            tableName: lifecycle_events
+            columns:
+              - column:
+                  name: timestamp

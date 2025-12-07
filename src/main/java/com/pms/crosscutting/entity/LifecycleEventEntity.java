@@ -15,7 +15,7 @@ public class LifecycleEventEntity {
     private Long id;
     
     @Column(name = "trace_id", nullable = false)
-    private UUID traceId;
+    private String traceId;
     
     @Column(name = "portfolio_id")
     private UUID portfolioId;
